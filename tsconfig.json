@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["es2017", "dom"],
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "baseUrl": "./",
+    "outDir": "./dist"
+  }
+}

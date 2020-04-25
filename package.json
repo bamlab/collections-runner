@@ -1,0 +1,39 @@
+{
+  "name": "collections-runner",
+  "version": "1.0.12",
+  "main": "src/index.ts",
+  "homepage": "https://github.com/marionbarrebam/collections-runner",
+  "bugs": "https://github.com/marionbarrebam/collections-runner/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/marionbarrebam/collections-runner.git"
+  },
+  "author": "Marion Valentin <marionnousvalentin@gmail.com>",
+  "keywords": [
+    "newman",
+    "postman",
+    "collection",
+    "testing",
+    "collections-runner",
+    "ci",
+    "api"
+  ],
+  "dependencies": {
+    "@types/inquirer": "^6.5.0",
+    "@types/lodash": "^4.14.150",
+    "@types/newman": "^4.5.0",
+    "@types/node": "^13.13.2",
+    "@types/postman-collection": "^3.5.3",
+    "console-log-tree": "^1.2.1",
+    "inquirer": "^7.1.0",
+    "lodash": "^4.17.15",
+    "meow": "^6.1.0",
+    "newman": "^5.0.0",
+    "postman-collection": "^3.6.0",
+    "typescript": "^3.8.3"
+  },
+  "bin": {
+    "collections-runner": "./dist/runner/runner.cli.js",
+    "collections-automator": "./dist/automator/automator.cli.js"
+  }
+}
