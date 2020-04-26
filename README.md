@@ -1,9 +1,11 @@
-# collections-runner
+Collections-runner
+================================== 
 
-CLI to run postman collections interactively.
-Can be used to test APIs.
-Can be used to develop APIs or applications using APIs.
-Is based on newman from Postman.
+CLI to run postman collections interactively.<br/>
+Can be used to test APIs. <br/>
+Can be used to develop APIs or applications using APIs.<br/>
+Is based on newman from Postman.<br/>
+
 ![](DEMO.gif)
 
 ## Features
@@ -19,7 +21,11 @@ Is based on newman from Postman.
 ## Install
 
 ```
-yarn add collections-runner
+# If you use npm:
+npm install --save-dev collections-runner
+
+# Or if you use Yarn:
+yarn add -D collections-runner
 ```
 
 Create a `postman` folder at the root of your project.
