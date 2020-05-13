@@ -20,6 +20,24 @@ var runCollections = function (flags, folders) {
         // eslint-disable-next-line no-console
         console.log(args.response.stream.toString());
     };
+    var runCallBack = function (error, summary) {
+        flags.updateLocalEnvironment && runner_setEnvironnement_1.saveEnvironmentVariables(environment);
+        var errorToDisplay;
+        if (error)
+            errorToDisplay = error;
+        if (summary.run.failures.length)
+            errorToDisplay =
+                summary.run.failures[0].error.name +
+                    " " +
+                    summary.run.failures[0].error.message;
+        if (errorToDisplay) {
+            console.log("Collection run encountered an error.", errorToDisplay);
+            process.exitCode = 1;
+        }
+        else {
+            console.log("Collection run with success!");
+        }
+    };
     newman
         .run({
         collection: collection,
@@ -27,12 +45,9 @@ var runCollections = function (flags, folders) {
         reporters: "cli",
         folder: folders,
         bail: true
-    }, function (error, summary) {
-        flags.updateLocalEnvironment && runner_setEnvironnement_1.saveEnvironmentVariables(environment);
-        if (error)
-            throw error;
     })
-        .on("request", displayResponseBody);
+        .on("request", displayResponseBody)
+        .on("done", runCallBack);
 };
 var run = function (folders, flags) {
     var shouldRunCollections = !flags.routes && !flags.environment;

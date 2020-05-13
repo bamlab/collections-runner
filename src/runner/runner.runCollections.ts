@@ -34,21 +34,36 @@ const runCollections = (
     console.log(args.response.stream.toString());
   };
 
+  const runCallBack = (
+    error: Error | null,
+    summary: newman.NewmanRunSummary
+  ): void => {
+    flags.updateLocalEnvironment && saveEnvironmentVariables(environment);
+    let errorToDisplay;
+    if (error) errorToDisplay = error;
+    if (summary.run.failures.length)
+      errorToDisplay =
+        summary.run.failures[0].error.name +
+        " " +
+        summary.run.failures[0].error.message;
+    if (errorToDisplay) {
+      console.log("Collection run encountered an error.", errorToDisplay);
+      process.exitCode = 1;
+    } else {
+      console.log("Collection run with success!");
+    }
+  };
+
   newman
-    .run(
-      {
-        collection,
-        environment,
-        reporters: "cli",
-        folder: folders,
-        bail: true
-      },
-      (error, summary) => {
-        flags.updateLocalEnvironment && saveEnvironmentVariables(environment);
-        if (error) throw error;
-      }
-    )
-    .on("request", displayResponseBody);
+    .run({
+      collection,
+      environment,
+      reporters: "cli",
+      folder: folders,
+      bail: true
+    })
+    .on("request", displayResponseBody)
+    .on("done", runCallBack);
 };
 
 const run = (folders: string | string[], flags: flagsTypes): void => {

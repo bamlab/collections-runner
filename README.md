@@ -9,7 +9,7 @@ Is based on newman from Postman.<br/>
 
 ## Features
 
-<a href="https://www.npmjs.com/package/collections-runner"><img src="https://img.shields.io/badge/npm%20package-1.0.19-brightgreen"></a>
+<a href="https://www.npmjs.com/package/collections-runner"><img src="https://img.shields.io/badge/npm%20package-1.0.20-brightgreen"></a>
 
 - Run postman collections with custom environment variables in a unique command line
 - Display all available routes and collections

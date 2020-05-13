@@ -1,6 +1,6 @@
 {
   "name": "collections-runner",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "main": "dist/index.js",
   "homepage": "https://github.com/marionnousvalentin/collections-runner",
   "bugs": "https://github.com/marionnousvalentin/collections-runner/issues",
