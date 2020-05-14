@@ -58,7 +58,7 @@ const runCollections = (
     .run({
       collection,
       environment,
-      reporters: "cli",
+      reporters: ['cli', 'html'],
       folder: folders,
       bail: true
     })
