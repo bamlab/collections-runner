@@ -54,11 +54,14 @@ const runCollections = (
     }
   };
 
+  const reporters = ['cli'];
+  if (flags.reporter) reporters.push(flags.reporter);
+
   newman
     .run({
       collection,
       environment,
-      reporters: ['cli', 'html'],
+      reporters,
       folder: folders,
       bail: true
     })

@@ -6,6 +6,7 @@ export type flagsTypes = {
   environment: boolean;
   ciEnvironment: boolean;
   updateLocalEnvironment: boolean;
+  reporter: string;
 };
 
 export type logTreeInput = { name: string; children?: logTreeInput[] };
