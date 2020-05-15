@@ -1,15 +1,14 @@
 # Collections-runner
 
-CLI to run postman collections interactively.<br/>
+Interactive CLI for postman collections on top of newman.<br/>
 Can be used to test APIs. <br/>
 Can be used to develop APIs or applications using APIs.<br/>
-Is based on newman from Postman.<br/>
 
 ![](DEMO.gif)
 
 ## Features
 
-<a href="https://www.npmjs.com/package/collections-runner"><img src="https://img.shields.io/badge/npm%20package-1.0.20-brightgreen"></a>
+<a href="https://www.npmjs.com/package/collections-runner"><img src="https://img.shields.io/badge/npm%20package-1.0.22-brightgreen"></a>
 
 - Run postman collections with custom environment variables in a unique command line
 - Display all available routes and collections
@@ -18,6 +17,7 @@ Is based on newman from Postman.<br/>
 - Enable CI environment to be integrated to CI tests
 - Select environment variables to update among the ones used in the selected routes
 - Store environment variables in a local file to be used on next run
+- Display run report on an html file
 
 ## Install
 
@@ -49,7 +49,7 @@ yarn collections-runner [routes names] [collections flags or vars]
 
 ```
 # Exemple for CI job:
-yarn collections-runner --ciEnvironment --updateLocalEnvironment=false
+yarn collections-runner --ciEnvironment --updateLocalEnvironment=false --reporter=html --reporterPath='./newman/output/report.html'
 ```
 
 Is used to interactively construct collections-runner commands.
