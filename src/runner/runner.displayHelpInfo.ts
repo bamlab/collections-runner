@@ -97,4 +97,9 @@ Options:
   --updateLocalEnvironment A boolean specifying if local environment variables should be overridden after running collections 
     Example: ./runCollections.js Register --updateLocalEnvironment
     Warning: by default postman_environment.local.json is overridden by the new environement variables
+  --reporter A string specifying an additional reporter (if not specified, only reporter will be "cli")
+    Example: ./runCollections.js Register --reporter=html
+    Warning: To make it work, you will need to add the specified reporter npm package dependency to your project
+  --reporterPath A string specifying your additional reporter export path (only work if reporter flag specified)
+    Example: ./runCollections.js Register --reporter=html --reporterPath='./newman/output/report.html'
 `;
