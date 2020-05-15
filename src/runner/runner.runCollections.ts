@@ -55,13 +55,21 @@ const runCollections = (
   };
 
   const reporters = ['cli'];
-  if (flags.reporter) reporters.push(flags.reporter);
+  let reporter = {};
+  if (flags.reporter) {
+    reporters.push(flags.reporter);
+    if (flags.reporterPath)
+      reporter = {
+        [flags.reporter]: { export: flags.reporterPath },
+      };
+  }
 
   newman
     .run({
       collection,
       environment,
       reporters,
+      reporter,
       folder: folders,
       bail: true
     })
