@@ -9,6 +9,7 @@ var defaultEnvironment = require("../../../../postman/postman_environment.json")
 var booleanTag = "boolean";
 var stringTag = "string";
 var runCollections = function (flags, folders) {
+    var _a;
     var environment = runner_setEnvironnement_1.setEnvironmentVariables(flags);
     // @ts-ignore
     var displayResponseBody = function (error, args) {
@@ -38,11 +39,21 @@ var runCollections = function (flags, folders) {
             console.log("Collection run with success!");
         }
     };
+    var reporters = ["cli"];
+    var reporter = {};
+    if (flags.reporter) {
+        reporters.push(flags.reporter);
+        if (flags.reporterPath)
+            reporter = (_a = {},
+                _a[flags.reporter] = { "export": flags.reporterPath },
+                _a);
+    }
     newman
         .run({
         collection: collection,
         environment: environment,
-        reporters: "cli",
+        reporters: reporters,
+        reporter: reporter,
         folder: folders,
         bail: true
     })
@@ -84,6 +95,12 @@ var possibleFlags = {
     updateLocalEnvironment: {
         type: booleanTag,
         "default": true
+    },
+    reporter: {
+        type: stringTag
+    },
+    reporterPath: {
+        type: stringTag
     }
 };
 var cli = meow(runner_displayHelpInfo_1.helpMessage, {

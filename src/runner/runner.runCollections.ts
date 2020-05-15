@@ -54,13 +54,13 @@ const runCollections = (
     }
   };
 
-  const reporters = ['cli'];
+  const reporters = ["cli"];
   let reporter = {};
   if (flags.reporter) {
     reporters.push(flags.reporter);
     if (flags.reporterPath)
       reporter = {
-        [flags.reporter]: { export: flags.reporterPath },
+        [flags.reporter]: { export: flags.reporterPath }
       };
   }
 
@@ -113,6 +113,12 @@ const possibleFlags = {
   updateLocalEnvironment: {
     type: booleanTag,
     default: true
+  },
+  reporter: {
+    type: stringTag
+  },
+  reporterPath: {
+    type: stringTag
   }
 };
 
