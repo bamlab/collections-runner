@@ -58,10 +58,12 @@ const runCollections = (
   let reporter = {};
   if (flags.reporter) {
     reporters.push(flags.reporter);
-    if (flags.reporterPath)
+    if (flags.reporterOptions) {
+      const parsedReporterOptions = JSON.parse(flags.reporterOptions);
       reporter = {
-        [flags.reporter]: { export: flags.reporterPath }
+        [flags.reporter]: parsedReporterOptions
       };
+    }
   }
 
   newman
@@ -117,7 +119,7 @@ const possibleFlags = {
   reporter: {
     type: stringTag
   },
-  reporterPath: {
+  reporterOptions: {
     type: stringTag
   }
 };
