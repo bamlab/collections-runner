@@ -100,6 +100,6 @@ Options:
   --reporter A string specifying an additional reporter (if not specified, only reporter will be "cli")
     Example: ./runCollections.js Register --reporter=html
     Warning: To make it work, you will need to add the specified reporter npm package dependency to your project
-  --reporterPath A string specifying your additional reporter export path (only work if reporter flag specified)
-    Example: ./runCollections.js Register --reporter=html --reporterPath='./newman/output/report.html'
+  --reporterOptions A string (JSON format) specifying your additional reporter options (only work if reporter flag specified)
+    Example: ./runCollections.js Register --reporter=html --reporterOptions='{"export":"./newman/output/report.html", "template":"./newman/template.hbs"}'
 `;
