@@ -38,7 +38,13 @@ const runCollections = (
     error: Error | null,
     summary: newman.NewmanRunSummary
   ): void => {
-    flags.updateLocalEnvironment && saveEnvironmentVariables(environment);
+    if (flags.updateLocalEnvironment) {
+      if (flags.environmentUrl) {
+        console.log('You can use --updateLocalEnvironment with --environmentUrl \n');
+      } else {
+        saveEnvironmentVariables(environment);
+      }
+    }
     let errorToDisplay;
     if (error) errorToDisplay = error;
     if (summary.run.failures.length)
@@ -67,11 +73,12 @@ const runCollections = (
   }
 
   const collectionToRun = flags.collectionUrl ? flags.collectionUrl : collection;
+  const environmentToRun = flags.environmentUrl ? flags.environmentUrl : environment;
 
   newman
     .run({
       collection: collectionToRun,
-      environment,
+      environment: environmentToRun,
       reporters,
       reporter,
       folder: folders,
@@ -127,6 +134,8 @@ const possibleFlags = {
   collectionUrl: {
     type: stringTag
   },
+  environmentUrl: {
+    type: stringTag
   }
 };
 
