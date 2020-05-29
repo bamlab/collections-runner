@@ -38,7 +38,13 @@ const runCollections = (
     error: Error | null,
     summary: newman.NewmanRunSummary
   ): void => {
-    flags.updateLocalEnvironment && saveEnvironmentVariables(environment);
+    if (flags.updateLocalEnvironment) {
+      if (flags.environmentUrl) {
+        console.log('You can use --updateLocalEnvironment with --environmentUrl \n');
+      } else {
+        saveEnvironmentVariables(environment);
+      }
+    }
     let errorToDisplay;
     if (error) errorToDisplay = error;
     if (summary.run.failures.length)
@@ -66,10 +72,22 @@ const runCollections = (
     }
   }
 
+  let collectionToRun = flags.collectionUrl ? flags.collectionUrl : collection;
+  let environmentToRun = flags.environmentUrl ? flags.environmentUrl : environment;
+
+  if (flags.apiKey) {
+    if (!flags.collectionUrl && !flags.environmentUrl) {
+      console.log('apiKey flag is useless if you do not specify --collectionUrl or --environmentUrl \n');
+    } else {
+      if (flags.collectionUrl) collectionToRun = `${collectionToRun}?apikey=${flags.apiKey}`;
+      if (flags.environmentUrl) environmentToRun = `${environmentToRun}?apikey=${flags.apiKey}`;
+    }
+  }
+
   newman
     .run({
-      collection,
-      environment,
+      collection: collectionToRun,
+      environment: environmentToRun,
       reporters,
       reporter,
       folder: folders,
@@ -120,6 +138,15 @@ const possibleFlags = {
     type: stringTag
   },
   reporterOptions: {
+    type: stringTag
+  },
+  collectionUrl: {
+    type: stringTag
+  },
+  environmentUrl: {
+    type: stringTag
+  },
+  apiKey: {
     type: stringTag
   }
 };

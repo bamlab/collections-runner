@@ -39,6 +39,7 @@ export const displayAvailableRoutes = (
   flags: flagsTypes
 ): void => {
   if (flags.routes) {
+    if (flags.collectionUrl) console.log('Sorry at this moment --collectionUrl is not compatible with --routes, showing availables routes in postman/postman_collection.json file \n')
     displayAvailableRoutesWhenAskedTo(collection);
   }
 };
@@ -65,6 +66,7 @@ export const displayAvailableEnvironmentVariable = (
   flags: flagsTypes
 ) => {
   if (flags.environment) {
+    if (flags.environmentUrl) console.log('Sorry at this moment --environmentUrl is not compatible with --environment, showing environment variables in postman/postman_environment.json file. \n')
     displayAvailableEnvironmentVariableWhenAskedTo(environment);
   }
 };
@@ -89,7 +91,9 @@ Options:
     Warning: by default collections are ran on local environment file config
   --routes A boolean specifying if collections list should be displayed on the console
     Example: ./runCollections.js Register --routes
+    Warning: Not compatible with: --collectionUrl
   --environment A boolean specifying if possible environment variable list should be displayed on the console
+    Warning: Not compatible with: --environmentUrl
     Example: ./runCollections.js Register --environment
   --ciEnvironment A boolean specifying if default ci environment should be loaded
     Example: ./runCollections.js Register --ciEnvironment
@@ -97,9 +101,18 @@ Options:
   --updateLocalEnvironment A boolean specifying if local environment variables should be overridden after running collections 
     Example: ./runCollections.js Register --updateLocalEnvironment
     Warning: by default postman_environment.local.json is overridden by the new environement variables
+    Warning: Not compatible with: --environmentUrl
   --reporter A string specifying an additional reporter (if not specified, only reporter will be "cli")
     Example: ./runCollections.js Register --reporter=html
     Warning: To make it work, you will need to add the specified reporter npm package dependency to your project
   --reporterOptions A string (JSON format) specifying your additional reporter options (only work if reporter flag specified)
     Example: ./runCollections.js Register --reporter=html --reporterOptions='{"export":"./newman/output/report.html", "template":"./newman/template.hbs"}'
+  --collectionUrl A string specifying collection URL you want to run. If specified, apiKey flag must be specified as well. If not specified, it will search for a file at path '../../../../postman/postman_collection.json'
+    Example: ./runCollections.js --collectionUrl='https://api.getpostman.com/collections/<uid>' --apiKey=<apikey>
+  --environmentUrl A string specifying environment URL you want to run. If specified, apiKey flag must be specified as well. If not specified, it will search for a file at path '../../../../postman/postman_environment.json'
+    Example: ./runCollections.js --collectionUrl='https://api.getpostman.com/collections/<uid>' --environmentUrl='https://api.getpostman.com/environments/<uid>' --apiKey=<apikey>
+    Warning: Not compatible with: --updateLocalEnvironment
+    --apiKey A string specifying your API_KEY
+    Example: ./runCollections.js --collectionUrl='https://api.getpostman.com/collections/<uid>' --environmentUrl='https://api.getpostman.com/environments/<uid>' --apiKey=<apikey>
+    Warning: Needed if you use --collectionUrl or --environmentUrl and that you didn't specified it directly in URLs
 `;

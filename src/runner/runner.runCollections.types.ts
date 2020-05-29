@@ -8,6 +8,9 @@ export type flagsTypes = {
   updateLocalEnvironment: boolean;
   reporter: string;
   reporterOptions: string;
+  collectionUrl: string;
+  environmentUrl: string;
+  apiKey: string;
 };
 
 export type logTreeInput = { name: string; children?: logTreeInput[] };
