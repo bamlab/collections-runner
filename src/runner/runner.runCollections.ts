@@ -66,9 +66,11 @@ const runCollections = (
     }
   }
 
+  const collectionToRun = flags.collectionUrl ? flags.collectionUrl : collection;
+
   newman
     .run({
-      collection,
+      collection: collectionToRun,
       environment,
       reporters,
       reporter,
@@ -121,6 +123,10 @@ const possibleFlags = {
   },
   reporterOptions: {
     type: stringTag
+  },
+  collectionUrl: {
+    type: stringTag
+  },
   }
 };
 
