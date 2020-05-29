@@ -72,8 +72,17 @@ const runCollections = (
     }
   }
 
-  const collectionToRun = flags.collectionUrl ? flags.collectionUrl : collection;
-  const environmentToRun = flags.environmentUrl ? flags.environmentUrl : environment;
+  let collectionToRun = flags.collectionUrl ? flags.collectionUrl : collection;
+  let environmentToRun = flags.environmentUrl ? flags.environmentUrl : environment;
+
+  if (flags.apiKey) {
+    if (!flags.collectionUrl && !flags.environmentUrl) {
+      console.log('apiKey flag is useless if you do not specify --collectionUrl or --environmentUrl \n');
+    } else {
+      if (flags.collectionUrl) collectionToRun = `${collectionToRun}?apikey=${flags.apiKey}`;
+      if (flags.environmentUrl) environmentToRun = `${environmentToRun}?apikey=${flags.apiKey}`;
+    }
+  }
 
   newman
     .run({
@@ -135,6 +144,9 @@ const possibleFlags = {
     type: stringTag
   },
   environmentUrl: {
+    type: stringTag
+  },
+  apiKey: {
     type: stringTag
   }
 };

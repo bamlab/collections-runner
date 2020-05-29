@@ -10,6 +10,7 @@ export type flagsTypes = {
   reporterOptions: string;
   collectionUrl: string;
   environmentUrl: string;
+  apiKey: string;
 };
 
 export type logTreeInput = { name: string; children?: logTreeInput[] };

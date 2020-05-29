@@ -112,4 +112,7 @@ Options:
   --environmentUrl A string specifying environment URL you want to run. If specified, apiKey flag must be specified as well. If not specified, it will search for a file at path '../../../../postman/postman_environment.json'
     Example: ./runCollections.js --collectionUrl='https://api.getpostman.com/collections/<uid>' --environmentUrl='https://api.getpostman.com/environments/<uid>' --apiKey=<apikey>
     Warning: Not compatible with: --updateLocalEnvironment
+    --apiKey A string specifying your API_KEY
+    Example: ./runCollections.js --collectionUrl='https://api.getpostman.com/collections/<uid>' --environmentUrl='https://api.getpostman.com/environments/<uid>' --apiKey=<apikey>
+    Warning: Needed if you use --collectionUrl or --environmentUrl and that you didn't specified it directly in URLs
 `;
